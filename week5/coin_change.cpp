@@ -1,10 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
+int dp[1001];
 
-int dp[100];
-
-int mincoins(int *den, int nd, int money)
+int mincoins(int money)
 {
     if (money < 0)
     {
@@ -15,28 +14,26 @@ int mincoins(int *den, int nd, int money)
         return 0;
     }
 
-    int minn = INT_MAX;
-    for (int i = 0; i < nd; i++)
+    if (dp[money]!=-1)
     {
-        if (money - *(den + i) >= 0)
-        {
-            minn = min(mincoins(den, nd, money - *(den + i)) + 1, minn);
-        }
+        return dp[money];
     }
-    return minn;
+
+    return dp[money] = 1 + min(
+            mincoins(money - 1),
+            min(
+                mincoins(money - 3),
+                mincoins(money - 4)
+                )
+        );
 }
 
 int main()
 {
-    int money, nd;
-    cin >> money >> nd;
-    int array[nd];
-    for (int i = 0; i < nd; i++)
-    {
-        cin >> array[i];
-    }
-
-    cout << mincoins(array, nd, money) << endl;
+    memset(dp, -1, sizeof dp);
+    int n;
+    cin >> n;
+    cout << mincoins(n);
 
     return 0;
 }
