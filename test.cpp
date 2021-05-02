@@ -1,32 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-int tenRaised(int k)
-{
-    int res = 1;
-    while (k--)
-    {
-        res *= 10;
-    }
-    return res;
-}
 
-int kth_dig(int n, int k)
+void a(int b[])
 {
-    if (n == n % tenRaised(k))
-    {
-        return n%10;
-    }
-    return kth_dig((n-n%10)/10, k);
+    b[0] = 99;
+    b[1] = 100;
+    return;
+
 }
 
 int main()
 {
-    cout << kth_dig(6453, 1);
-    cout << kth_dig(6453, 2);
-    cout << kth_dig(6453, 3);
-    cout << kth_dig(6453, 4);
-    cout << kth_dig(6453, 5);
+    int b[2] = {0, 1};
+    a(b);
+    cout<< b[0] << endl;
+    cout<< b[1] << endl;
     return 0;
-    
 }
